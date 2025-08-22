@@ -28,13 +28,7 @@
 ### Base de Datos
 - **PostgreSQL** o **MySQL** mediante TypeORM
 
-- - ## Capturas de Pantalla
 
-### Pantalla de Inicio
-![Pantalla de Inicio](public/screenshots/foto-gestion.png)
-
-### Gestión de Libros
-![Gestión de Libros](public/screenshots/foto-inicio.png)
 
 
 
