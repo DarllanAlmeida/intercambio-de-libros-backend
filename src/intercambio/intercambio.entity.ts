@@ -1,30 +1,23 @@
-import {
-  Entity,
-  PrimaryGeneratedColumn,
-  ManyToOne,
-  JoinColumn,
-  Column,
-} from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
 import { Libro } from '../libro/libro.entity';
-import { EstadoIntercambio } from './estado-intercambio.enum';
 
-@Entity()
+export enum EstadoIntercambio {
+  PENDIENTE = 'pendiente',
+  ACEPTADO = 'aceptado',
+  RECHAZADO = 'rechazado',
+}
+
+@Entity('intercambios')
 export class Intercambio {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @ManyToOne(() => Libro, { onDelete: 'CASCADE' })
-  @JoinColumn({ name: 'libroOfrecidoId' })
-  libroOfrecido: Libro;
-
-  @ManyToOne(() => Libro, { onDelete: 'CASCADE' })
-  @JoinColumn({ name: 'libroSolicitadoId' })
+  @ManyToOne(() => Libro, libro => libro.intercambiosSolicitados, { onDelete: 'CASCADE' })
   libroSolicitado: Libro;
 
-  @Column({
-    type: 'varchar',
-    length: 20,
-    default: EstadoIntercambio.PENDIENTE,
-  })
+  @ManyToOne(() => Libro, libro => libro.intercambiosOfrecidos, { onDelete: 'CASCADE' })
+  libroOfrecido: Libro;
+
+  @Column({ type: 'text', default: EstadoIntercambio.PENDIENTE })
   estado: EstadoIntercambio;
 }

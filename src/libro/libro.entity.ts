@@ -1,10 +1,10 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany } from 'typeorm';
 import { User } from '../user/user.entity';
 import { IsNotEmpty } from 'class-validator';
 import { EstadoLibro } from './estado_libro.enum';
+import { Intercambio } from '../intercambio/intercambio.entity';
 
-
-@Entity()
+@Entity('libros')
 export class Libro {
   @PrimaryGeneratedColumn()
   id: number;
@@ -29,4 +29,11 @@ export class Libro {
 
   @ManyToOne(() => User, user => user.libros)
   usuario: User;
+
+  // Relaciones con Intercambio
+  @OneToMany(() => Intercambio, intercambio => intercambio.libroSolicitado, { cascade: true })
+  intercambiosSolicitados: Intercambio[];
+
+  @OneToMany(() => Intercambio, intercambio => intercambio.libroOfrecido, { cascade: true })
+  intercambiosOfrecidos: Intercambio[];
 }

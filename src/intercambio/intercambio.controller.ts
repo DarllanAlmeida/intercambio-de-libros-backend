@@ -1,9 +1,9 @@
-import { Controller, Post, Body, Get, Patch, Param, ParseIntPipe } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, ParseIntPipe } from '@nestjs/common';
 import { IntercambioService } from './intercambio.service';
 import { CrearIntercambioDto } from './dto/crear-intercambio.dto';
 import { Intercambio } from './intercambio.entity';
 
-@Controller('intercambios')
+@Controller('intercambio')
 export class IntercambioController {
   constructor(private readonly intercambioService: IntercambioService) {}
 

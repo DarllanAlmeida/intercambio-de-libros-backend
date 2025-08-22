@@ -1,11 +1,9 @@
-import { IsNotEmpty, IsNumber } from 'class-validator';
+import { IsInt, IsNotEmpty } from 'class-validator';
 
 export class CrearIntercambioDto {
-  @IsNumber()
-  @IsNotEmpty()
-  libroOfrecidoId: number;
-
-  @IsNumber()
-  @IsNotEmpty()
+  @IsInt()
   libroSolicitadoId: number;
+
+  @IsInt()
+  libroOfrecidoId: number;
 }
